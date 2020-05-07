@@ -1,0 +1,10 @@
+scikit-learn
+pandas
+Pillow
+opencv-python
+jupyter
+setuptools
+scikit-image
+imutils
+matplotlib
+pytesseract
