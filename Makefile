@@ -19,9 +19,7 @@ build:
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
 
 bash: build
-	xhost + && $(DOCKER) run -it -ti --net=host --ipc=host -v $(SRC):/src/workspace -v $(DATA):/data -e DISPLAY=$(DISPLAY) -v /tmp/.X11-unix:/tmp/.X11-unix --env="QT_X11_NO_MITSHM=1" --env KERAS_BACKEND=$(BACKEND) $(IMAGE_NAME):$(IMAGE_TA$
+	xhost + && $(DOCKER) run -it -ti --net=host --ipc=host -v $(SRC):/src/workspace -v $(DATA):/data -e DISPLAY=$(DISPLAY) -v /tmp/.X11-unix:/tmp/.X11-unix --env="QT_X11_NO_MITSHM=1" --env KERAS_BACKEND=$(BACKEND) $(IMAGE_NAME):$(IMAGE_TAG) bash
 
 notebook: build
 	$(DOCKER) run --gpus all -it -v $(SRC):/src/workspace -v $(DATA):/data --net=host --env KERAS_BACKEND=$(BACKEND) $(IMAGE_NAME):$(IMAGE_TAG)
-
-
