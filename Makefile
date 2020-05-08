@@ -3,7 +3,7 @@ help:
 
 IMAGE_NAME=tensorflow
 IMAGE_TAG=document-denoising-stacked-autoencoder
-DATA?=$(shell dirname `pwd`)
+DATA?=`pwd`
 GPU?=0
 DOCKER_FILE=Dockerfile
 DOCKER=GPU=$(GPU) nvidia-docker
