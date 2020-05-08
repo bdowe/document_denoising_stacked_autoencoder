@@ -2,9 +2,8 @@ help:
 	@cat Makefile
 
 IMAGE_NAME=tensorflow
-PHP_IMAGE_NAME=php
-IMAGE_TAG=worksheet-grading-app
-DATA?="${HOME}/Data"
+IMAGE_TAG=document-denoising-stacked-autoencoder
+DATA?=$(shell dirname `pwd`)
 GPU?=0
 DOCKER_FILE=Dockerfile
 DOCKER=GPU=$(GPU) nvidia-docker
@@ -12,7 +11,6 @@ BACKEND=tensorflow
 PYTHON_VERSION?=3.6
 CUDA_VERSION?=9.0
 CUDNN_VERSION?=7
-TEST=tests/
 SRC?=$(shell dirname `pwd`)
 
 build:
