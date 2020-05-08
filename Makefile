@@ -4,10 +4,6 @@ help:
 IMAGE_NAME=tensorflow
 IMAGE_TAG=document-denoising-stacked-autoencoder
 DATA?=`pwd`
-BACKEND=tensorflow
-PYTHON_VERSION?=3.6
-CUDA_VERSION?=9.0
-CUDNN_VERSION?=7
 DOCKER=docker
 ifdef GPU
 	DOCKER=nvidia-docker
@@ -17,7 +13,7 @@ build:
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
 
 bash: build
-	xhost + && $(DOCKER) run -it -ti --net=host --ipc=host -v $(DATA):/data -e DISPLAY=$(DISPLAY) -v /tmp/.X11-unix:/tmp/.X11-unix --env="QT_X11_NO_MITSHM=1" --env KERAS_BACKEND=$(BACKEND) $(IMAGE_NAME):$(IMAGE_TAG) bash
+	xhost + && $(DOCKER) run -it -ti --net=host --ipc=host -v $(DATA):/data -e DISPLAY=$(DISPLAY) -v /tmp/.X11-unix:/tmp/.X11-unix --env="QT_X11_NO_MITSHM=1" $(IMAGE_NAME):$(IMAGE_TAG) bash
 
 notebook: build
-	$(DOCKER) run -it -v $(DATA):/data --net=host --env KERAS_BACKEND=$(BACKEND) $(IMAGE_NAME):$(IMAGE_TAG)
+	$(DOCKER) run -it -v $(DATA):/data --net=host $(IMAGE_NAME):$(IMAGE_TAG)
