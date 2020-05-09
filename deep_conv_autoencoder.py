@@ -23,6 +23,9 @@ class AE():
         h = Conv2D(64, (3, 3), activation='relu', padding='same')(h)
         h = UpSampling2D((2, 2))(h)
         output_layer = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(h)
+        
+        model = Model(input_layer, output_layer)
+        model.compile(optimizer='adam', loss='mse')
 
-        return Model(input_layer, output_layer)
+        return model
         
