@@ -19,25 +19,20 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
         tesseract-ocr \
     && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /data
+
 # Install all of the packages
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
-RUN pip install scikit-learn
-RUN pip install pandas
-RUN pip install Pillow
-RUN pip install opencv-python
-RUN pip install jupyter
-RUN pip install -U pip setuptools
-RUN pip install --upgrade scikit-image
-RUN pip install imutils
-RUN pip install matplotlib
-RUN pip install pytesseract
+
+COPY requirements.txt /data/
+RUN pip install --requirement requirements.txt
+
 RUN rm -rf /root/.cache
+
 
 # Env Variables
 ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
-
-WORKDIR /data
 
 EXPOSE 8888
 
