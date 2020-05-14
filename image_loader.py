@@ -3,22 +3,24 @@ import cv2
 from tensorflow.keras.preprocessing import image
 
 class ImageLoader():
-    @staticmethod
-    def load_image(path, img_w, img_h):
-        image_list = np.zeros((len(path), img_w, img_h, 1))
+    def __init__(self, img_w, img_h):
+        self.img_w = img_w
+        self.img_h = img_h
+    
+    def load_image(self, path):
+        image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
-            img = image.load_img(fig, color_mode='grayscale', target_size=(img_w, img_h))
+            img = image.load_img(fig, color_mode='grayscale', target_size=(self.img_w, self.img_h))
             x = image.img_to_array(img).astype('float32')
             x = x / 255.0
             image_list[i] = x
 
         return image_list
 
-    @staticmethod
-    def load_image_blur(path, img_w, img_h):
-        image_list = np.zeros((len(path), img_w, img_h, 1))
+    def load_image_blur(self, path):
+        image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
-            img = image.load_img(fig, color_mode='grayscale', target_size=(img_w, img_h))
+            img = image.load_img(fig, color_mode='grayscale', target_size=(self.img_w, self.img_h))
             x = image.img_to_array(img).astype('float32')
             x = x / 255.0
             x = cv2.medianBlur(x, 3)
@@ -27,9 +29,8 @@ class ImageLoader():
 
         return image_list
 
-    @staticmethod
-    def load_image_canny_dilate_erode(path, img_w, img_h):
-        image_list = np.zeros((len(path), img_w, img_h, 1))
+    def load_image_canny_dilate_erode(self, path):
+        image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
             img = cv2.imread(fig)
             edges = cv2.Canny(img,100,200)
@@ -38,15 +39,14 @@ class ImageLoader():
             img_erosion = cv2.erode(img_dilation, kernel, iterations=1) 
             x = image.img_to_array(img_erosion).astype('float32')
             x = x / 255.0
-            x = cv2.resize(x, (img_h, img_w))
+            x = cv2.resize(x, (self.img_h, self.img_w))
             x = np.expand_dims(x, axis=-1)
             image_list[i] = x
 
         return image_list
     
-    @staticmethod
-    def load_image_threshold(path, img_w, img_h, threshold='adaptive_gaussian'):
-        image_list = np.zeros((len(path), img_w, img_h, 1))
+    def load_image_threshold(self, path, threshold='adaptive_gaussian'):
+        image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
             img = cv2.imread(fig)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -60,7 +60,7 @@ class ImageLoader():
                 cv2.THRESH_BINARY,105,2)
             x = image.img_to_array(th).astype('float32')
             x = x / 255.0
-            x = cv2.resize(x, (img_h, img_w))
+            x = cv2.resize(x, (self.img_h, self.img_w))
             x = np.expand_dims(x, axis=-1)
             image_list[i] = x
 
