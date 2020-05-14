@@ -38,7 +38,7 @@ class ImageLoader():
             img_erosion = cv2.erode(img_dilation, kernel, iterations=1) 
             x = image.img_to_array(img_erosion).astype('float32')
             x = x / 255.0
-            x = cv2.resize(x, (img_w, img_h))
+            x = cv2.resize(x, (img_h, img_w))
             x = np.expand_dims(x, axis=-1)
             image_list[i] = x
 
@@ -60,7 +60,7 @@ class ImageLoader():
                 cv2.THRESH_BINARY,105,2)
             x = image.img_to_array(th).astype('float32')
             x = x / 255.0
-            x = cv2.resize(x, (img_w, img_h))
+            x = cv2.resize(x, (img_h, img_w))
             x = np.expand_dims(x, axis=-1)
             image_list[i] = x
 
