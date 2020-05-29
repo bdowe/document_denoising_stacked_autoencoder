@@ -7,6 +7,7 @@ class ImageLoader():
         self.img_w = img_w
         self.img_h = img_h
     
+    # load image as numpy array. Normalize
     def load_image(self, path):
         image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
@@ -17,6 +18,7 @@ class ImageLoader():
 
         return image_list
 
+    # load image and apply median blur
     def load_image_blur(self, path):
         image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
@@ -29,6 +31,7 @@ class ImageLoader():
 
         return image_list
 
+    # load image and apply canny edge detection, dilation, and erosion
     def load_image_canny_dilate_erode(self, path):
         image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
@@ -45,6 +48,7 @@ class ImageLoader():
 
         return image_list
     
+    # load image and apply thresholding, based on parameter
     def load_image_threshold(self, path, threshold='adaptive_gaussian'):
         image_list = np.zeros((len(path), self.img_w, self.img_h, 1))
         for i, fig in enumerate(path):
