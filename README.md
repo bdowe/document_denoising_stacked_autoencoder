@@ -6,7 +6,7 @@ This project implements a stacked convolutional neural network to denoise "dirty
 
 ### References
 * The model architecture used in this repository is inspired by this [article](https://medium.com/illuin/cleaning-up-dirty-scanned-documents-with-deep-learning-2e8e6de6cfa6). 
-* The dataset used for model training and inference is the [document denoising dataset on kaggle](https://www.kaggle.com/c/denoising-dirty-documents/overview)
+* The [dataset](https://www.kaggle.com/c/denoising-dirty-documents/overview) used for model training and inference is the document denoising dataset on kaggle.
 
 ## Getting Started
 
@@ -17,8 +17,23 @@ pip install -r requirements.txt
 ```
 
 ### Running with Docker
-You can also run this repository from within a container using [docker](https://www.docker.com/). The docker commands needed are implemented in the provided `Makefile`. To build the docker image, run the following:
+Alternatively, you can also run this repository from within a [docker](https://www.docker.com/) container. The docker commands needed are implemented in the provided `Makefile`. To build the docker image, run the following:
 ```
 make build
 ```
+To run the container and start a jupyter notebook server locally, run the following command. A link to the notebook server will be provided as output in the command line.
 
+```
+make notebook
+```
+
+To open a bash shell from within the container after starting it up, run the following command:
+```
+make bash
+```
+
+### Running on a GPU with Docker
+To run as a docker container with GPU training enabled (assuming you have access to a machine with a Nvidia GPU, add `GPU=1` to either of the previous 2 commands for running the docker container. Note: You must have [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) installed on your local machine, as well as the latest version of [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads). For example, to start the container and run a jupyter notebook server with gpu training enabled, run the following command:
+```
+make notebook GPU=1
+```
