@@ -33,7 +33,7 @@ make bash
 ```
 
 ### Running on a GPU with Docker
-To run as a docker container with GPU training enabled (assuming you have access to a machine with a Nvidia GPU, add `GPU=1` to either of the previous 2 commands for running the docker container. Note: You must have [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) installed on your local machine, as well as the latest version of [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads). For example, to start the container and run a jupyter notebook server with gpu training enabled, run the following command:
+To run as a docker container with GPU training enabled (assuming you have access to a machine with a Nvidia GPU), add `GPU=1` to either of the previous 2 commands for running the docker container. Note: You must have [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) installed on your local machine, as well as the latest version of [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads). For example, to start the container and run a jupyter notebook server with gpu training enabled, run the following command:
 ```
 make notebook GPU=1
 ```
